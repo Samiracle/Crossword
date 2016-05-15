@@ -6,21 +6,10 @@ import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import podolak.mateusz.crosswords.R;
-import podolak.mateusz.crosswords.helpers.FileReader;
-
-import static podolak.mateusz.crosswords.helpers.GlobalTexts.*;
 
 public class MainActivity extends Activity {
 
-    private FileReader fileReader;
     private Handler mHandler = new Handler();
 
     @Override
