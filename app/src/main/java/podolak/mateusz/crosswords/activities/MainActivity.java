@@ -6,11 +6,18 @@ import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 
+import java.io.IOException;
+import java.util.List;
+
 import podolak.mateusz.crosswords.R;
+import podolak.mateusz.crosswords.helpers.CrosswordGenerator;
+import podolak.mateusz.crosswords.helpers.FileReader;
 
 public class MainActivity extends Activity {
 
     private Handler mHandler = new Handler();
+    private CrosswordGenerator crosswordGenerator = new CrosswordGenerator();
+    private FileReader fileReader = new FileReader();
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -36,6 +43,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try {
+            List<String> strings = crosswordGenerator.sortWordsList(fileReader.getWordsFromFile(getResources().openRawResource(R.raw.words_file)));
+            char[][] chars = crosswordGenerator.addLongestWordToGrid(strings);
+            char[][] chars1 = crosswordGenerator.addSecondWordToGrid(strings, chars);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Runnable decor_view_settings = new Runnable() {
